@@ -15,16 +15,15 @@
   });
 
   cw1.addEventListener("click", function () {
+    const select = document.getElementById("selectId");
+    const idValue = select.value;
+
     answer.innerHTML = "<p>Loading...</p>";
     setTimeout(() => {
-      fetch("https://jsonplaceholder.typicode.com/posts")
+      fetch(`https://jsonplaceholder.typicode.com/posts/${idValue}`)
         .then((response) => response.json())
         .then((array) => {
-          let html = "<ul>";
-
-          array.forEach((a) => {
-            html += `<li>${a.title}<br>${a.body}</li>`;
-          });
+          let html = `<p>${array.id}</p><p>${array.title}<br>${array.body}</p>`;
 
           answer.innerHTML = html;
         });
