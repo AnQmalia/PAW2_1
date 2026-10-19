@@ -15,19 +15,24 @@
   });
 
   cw1.addEventListener("click", function () {
-    const select = document.getElementById("selectId");
-    const idValue = select.value;
+    answer.innerHTML = "<p>Processing...</p>";
+    const newPostData = {
+      title: "test",
+      body: "tes",
+      userId: 1,
+    };
 
-    answer.innerHTML = "<p>Loading...</p>";
-    setTimeout(() => {
-      fetch(`https://jsonplaceholder.typicode.com/posts/${idValue}`)
-        .then((response) => response.json())
-        .then((array) => {
-          let html = `<p>${array.id}</p><p>${array.title}<br>${array.body}</p>`;
-
-          answer.innerHTML = html;
-        });
-    }, 1000);
+    fetch(`https://jsonplaceholder.typicode.com/posts`, {
+      method: "Post",
+      body: JSON.stringify(newPostData),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    })
+      .then((response) => response.json())
+      .then((array) => {
+        answer.innerHTML = `Dodano nowy post o ID = ${array.id}`;
+      });
   });
 
   cw2.addEventListener("click", function () {
