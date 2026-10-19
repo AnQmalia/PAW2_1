@@ -15,17 +15,20 @@
   });
 
   cw1.addEventListener("click", function () {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then((response) => response.json())
-      .then((array) => {
-        let html = "<ul>";
+    answer.innerHTML = "<p>Loading...</p>";
+    setTimeout(() => {
+      fetch("https://jsonplaceholder.typicode.com/posts")
+        .then((response) => response.json())
+        .then((array) => {
+          let html = "<ul>";
 
-        array.forEach((a) => {
-          html += `<li>${a.title}<br>${a.body}</li>`;
+          array.forEach((a) => {
+            html += `<li>${a.title}<br>${a.body}</li>`;
+          });
+
+          answer.innerHTML = html;
         });
-
-        answer.innerHTML = html;
-      });
+    }, 1000);
   });
 
   cw2.addEventListener("click", function () {
